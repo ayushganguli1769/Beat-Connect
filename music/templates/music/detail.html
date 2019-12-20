@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block style %}
+  <style>
+  .container
+  {
+      font-size: large;
+  }
+  </style>
+{% endblock style %}
+{% block title %} 
+  {{album.album_title}} Details
+{% endblock title %}
+{% block head %}
+{% endblock head %}
+{% block body %}
+{% load static %}
+{% static 'music' as base %}
+<br>
+<!-- Button to Open the Modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="float: right; margin-right:18px">
+    ADD SONG
+  </button>
+<div class="container">
+
+
+
+  <h1><span class="badge badge-danger">{{ album.album_title }}</span></h1>
+ <h4><span class="badge badge-warning">By {{ album.artist }}</span></h4> 
+
+
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+    <br>
+{% endif %}
+<br>
+    <form action="/music/album/{{album.id}}/favourite/" method="POST">
+        {% csrf_token %}
+     <table class="table">
+    <thead class="thead-dark">
+        <tr>
+        <th>Song Title</th>
+        <th>Action</th>
+        <th>Play</th>
+        </tr>
+    </thead>
+{% for song in album.song_set.all %}
+
+    <tbody>
+      <tr>
+        <td>{{ song.song_title }}{% if song.is_favorite %}
+            <img src="{{base}}/star.jpg" width="27px" height="10px">
+        {% endif %}</td>
+        <td><input type="radio" id="song{{forloop.counter}}" name="song" value="{{ song.id }}"></td>
+        <td>{% if song.audio_file %}
+            <a href="{{song.audio_file.url}}" target="_blank"><strong>PLAY</strong></a>
+           
+            {% endif %}</td>
+      </tr>
+
+
+
+{% endfor %}
+</tbody>
+</table>
+<input type="submit" value="Favourite" name="favourite" class="btn btn-success">
+<input type="submit" value="Unfavourite" name="unfavourite" class="btn btn-warning">
+<input type="submit" value="delete song" name="delete" class="btn btn-danger">
+</form>
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">ADD SONG</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form action="/music/album/{{album.id}}/add/" method="POST" enctype="multipart/form-data" >
+
+            <label for="file_type" class="col-md-4">File Type</label><input type="text" name="file_type" class="col-md-6"><br>
+            <label for="title" class="col-md-4">Title</label><input type="text" name="title" class="col-md-6"><br>
+            <br>
+            <label for="audio_file" class="col-md-2">Audio file</label><input type="file" name ="audio_file" id="audio_file" value="Audio File"><br>
+            <button  id="add" name="addSong" class="col-md-3 push-md-9 btn btn-success" class="btn btn-success">ADD</button>
+
+
+                {% csrf_token %}
+                <!--
+        <div class="row">
+                
+           <div class="col-md-5">  <label for="addSong">File type</label> </div> <div class="col-md-7"> <input type="text" name="file_type" id="file_type"></div>
+        </div>
+        <div class="row">
+            <label for="title">Title</label> <input type="text" name="title" id="title"><br>
+        </div>
+            <label for="audio_file">Audio File</label><input type="file" name ="audio_file" id="audio_file" value="Audio File"><br>
+            <input type="submit" name="addSong"><br>
+            </form>
+        </div>
+  -->
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+<!--Add song-->
+
+</div>
+
+{% endblock body %}

@@ -1,0 +1,12 @@
+#mainHeading
+{
+    padding: 10px;
+    background-color: red;
+    color: white;
+    position: relative;
+    left: 1%;
+    margin:3px;
+    padding:3px;
+    border: solid 2px black;
+    border-radius: 13px;
+}

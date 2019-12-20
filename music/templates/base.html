@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}
+      
+    {% endblock title %}</title>
+    {% block head %}
+      
+    {% endblock head %}
+{% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+ <link rel="stylesheet" href="{% static 'base1.css' %}"> 
+ <source src="{% static 'base.js' %}" > 
+    {% block style %}
+      
+    {% endblock style %}
+</head>
+
+<body>
+    <nav>
+        <a id="resp-menu" class="responsive-menu" href="#"><i class="fa fa-reorder"></i> BEAT-CONNECT</a>    
+           <ul class="menu">
+           <li><a href="/"><i class="fa fa-home"></i> HOME</a>
+        {% if user.is_authenticated %}
+
+          <li><a  href="/music/"> MUSIC</a>
+          </li>
+                    
+        {% endif %}
+          {% if user.is_authenticated == False %}
+          <li><a  href="/music/register/">REGISTER</a></li>
+          {% endif %}
+          <li><a  href="#"><i class="#"></i> CONTACT</a></li>
+          <li style="float:right;">
+          {% if user.is_authenticated %}
+          <a  href="/music/logout/"> LOGOUT </a></li>
+            {% else %}
+        <a  href="/music/login//"> LOGIN </a></li>
+        {% endif %}
+       <li> <a  href="/admin/"> ADMIN </a></li>
+
+          </ul>
+          </nav>
+    {% block body %}
+      
+    {% endblock body %}
+</body>
+</html>

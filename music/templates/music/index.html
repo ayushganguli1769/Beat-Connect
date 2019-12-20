@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block style %}
+  <style>
+	  #myModal
+	  { 
+	font-size: large;
+
+}
+  </style>
+{% endblock style %}
+{% block title %}
+  INDEX
+{% endblock title %}
+{% block head %}
+
+	{% load static %}
+  <link rel="stylesheet" href="{% static 'music/index.css' %}">
+{% endblock head %}
+{% block body %}
+
+<!-- Button to Open the Modal -->
+<br>
+<div class="col-md-2 push-md-10 col-sm-3 push-sm-8">
+<button  type="button" id="myButton" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+	ADD ALBUM
+  </button>
+  </div>
+  <div class="container-fluid">
+  <!-- The Modal -->
+  <div class="modal" id="myModal">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+  
+		<!-- Modal Header -->
+		<div class="modal-header">
+		  <h4 class="modal-title">ADD ALBUM</h4>
+		  <button type="button" class="close" data-dismiss="modal">&times;</button>
+		</div>
+  
+		<!-- Modal body -->
+		<div class="modal-body" style="font-size: x-large;">
+			<form action="/music/album/add/" method="POST" enctype="multipart/form-data" >
+				{% csrf_token %}
+					<label for="artist" class="col-md-4">Artist</label><input type="text" name="artist" class="col-md-6"><br>
+					<label for="title" class="col-md-4">Title</label><input type="text" name="title" class="col-md-6"><br>
+					<label for="genre" class="col-md-4">Genre</label><input type="text" name="genre"class="col-md-6"><br>
+					<br>
+					<input type="file" name="logo" class="col-md-7" ><br>
+					<button  id="add" name="add" class="col-md-3 push-md-9 btn btn-success" class="btn btn-success">ADD</button>
+					<!--<input type="submit" value="SUBMIT" id="add" name="add">-->
+			</form>
+
+		</div>
+  
+		<!-- Modal footer -->
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		</div>
+  
+	  </div>
+	</div>
+  </div>
+
+
+
+{%if all_album%}
+<H1><span class="badge badge-danger">{{request.user.username}}'s Albums</span></H1>
+
+<br>
+<br>
+<div class="row">
+{% for album in all_album %}
+	<div class="col-md-6 col-lg-4 col-xl-4 col-sm-12">
+		<div class="card" >
+  <img class="card-img-top img-fluid" src="{{album.album_logo.url}}" alt="Card image">
+  <div class="card-body">
+    <h2 class="card-title">{{album.album_title}}</h2>
+	<h4 class="card-title">By {{album.artist}}</h4>
+	<h4 class="card-title">Genre: {{album.genre}}</h4>
+
+	<a href="/music/album/{{album.id}}" class="btn btn-primary">VIEW DETAILS</a>
+	<a href="/music/album/{{album.id}}/delete/" class="btn btn-primary">DELETE</a>
+  </div>
+</div>
+<br>
+
+</div>
+{% endfor %}
+</div>
+{%else%}
+<h3>You don't have any album</h3>
+{%endif%}
+</div>
+ </div>
+{% endblock body %}
+

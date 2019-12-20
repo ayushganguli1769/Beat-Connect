@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}
+  Register
+{% endblock title %}
+{% block head %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'music/register.css' %}">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+<!-- web font -->
+<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+<!-- //web font -->
+{% endblock head %}
+{% block body %}
+  
+	<!-- main -->
+	<div class="main-w3layouts wrapper">
+		<h1>Register</h1>
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+				<form action="/music/register/" method="post">
+					{% csrf_token %}
+					<input class="text" type="text" name="first_name" placeholder="First Name" required=""><br>
+					<input class="text" type="text" name="last_name" placeholder="Last Name" required=""><br>
+					<input class="text" type="text" name="username" placeholder="username" required=""><br>
+					<input class="text email" type="email" name="email" placeholder="email" required="">
+					<input class="text" type="password" name="password1" placeholder="password" required="">
+					<input class="text w3lpass" type="password" name="password2" placeholder="Confirm Password" required="">
+					<input type="submit" value="SIGNUP" name="register">
+				</form>
+				<p>Already have an account? <a href="/music/login/"> Login Now!</a></p>
+			</div>
+		</div>
+
+		<ul class="colorlib-bubbles">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+	<!-- //main -->
+{% endblock body %}
