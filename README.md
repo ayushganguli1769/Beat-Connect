@@ -16,3 +16,15 @@ Click on view details to view details page. Following is a screenshot of the det
 Click on ADD SONG icon to add your songs. A modal will pop up. Add suitable details along with mp3 file.</br></br>
 <img src = "https://user-images.githubusercontent.com/53971272/71373889-b9e54800-25de-11ea-91f4-487609ac16e2.png" height = "300px" width = "500px"></br></br>
 Feature to favourate songs is also present in the app.
+## How to run this project?
+```bash
+  pip install -r requirements.txt
+  
+```
+</br> Then go to the project directory.
+```bash
+  python manage.py runserver
+  
+```
+</br> Type the following url in your web browser http://127.0.0.1:8000/
+<strong> Enjoy your music </stromg>
