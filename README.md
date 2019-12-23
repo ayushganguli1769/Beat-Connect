@@ -26,5 +26,5 @@ Feature to favourate songs is also present in the app.
   python manage.py runserver
   
 ```
-</br> Type the following url in your web browser http://127.0.0.1:8000/
+</br> Type the following url in your web browser http://127.0.0.1:8000/  </br>
 <strong> Enjoy your music </stromg>
